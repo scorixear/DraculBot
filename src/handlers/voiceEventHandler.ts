@@ -31,11 +31,11 @@ export default class VoiceEventHandler {
           const channel = await newVoice.guild.channels.create({
             name: replacement.replace('$', counter.toString()),
             type: ChannelType.GuildVoice,
-            parent: newUserChannel.parent ?? undefined,
-            position: newUserChannel.position + 1
+            parent: newUserChannel.parent ?? undefined
           });
-          channel.permissionOverwrites.set(newUserChannel.permissionOverwrites.cache);
-          channel.setUserLimit(newUserChannel.userLimit);
+          await channel.permissionOverwrites.set(newUserChannel.permissionOverwrites.cache);
+          await channel.setUserLimit(newUserChannel.userLimit);
+          await channel.setPosition(newUserChannel.position + 1);
           VoiceEventHandler.tempChannels.push(channel);
           newVoice.setChannel(channel);
         }
