@@ -1,49 +1,46 @@
 export default class LanguageHandler {
   public static language = {
     commands: {
-    },
-    handlers: {
-      command: {
+      addTempChannel: {
+        description: 'Links a Voice-Channel to a Temp-Channel.',
         error: {
-          unknown: 'This command is unknown. Use `$0help` for a list of commands.',
-          generic_error: 'There was an Error executing the command `$0$1`.',
-          general_format: 'Your command is not well formated:\n`$0<Command> [args]`',
-          args_format:
-            'Your arguments are not well formated.\n*Hint: Arguments with spaces must be surrounded by one " and cannot contain any additional "*',
-          params_format:
-            "Your options are not well formated.\n*Hint: Options must start with '--' and __can__ contain one additional argument.*"
+          usageTitle: 'Wrong usage',
+          textTitle: 'Textchannel selected',
+          textDescription: 'Textchannel select, the channel must be a voice channel.',
+          sqlTitle: 'DB Error',
+          sqlDescription: 'channel could not be saved.'
         },
-        permissions: {
-          error: 'Invalid permissions to use `$0$1`!'
+        labels: {
+          success: 'Channel configured',
+          description: 'Channel `$0` is configured. Temp channel follow the schema `$1`'
         },
+        options: {
+          channel: 'The channel that should be the temp channel generator',
+          channel_names: 'The schema for the temp channel names.'
+        }
+      },
+      removeTempChannel: {
+        description: 'Removes the configuration of temp-channels',
+        error: {
+          usageTitle: 'Wrong Usage',
+          sqlTitle: 'DB Error',
+          sqlDescription: 'Could not delete channel configuration.'
+        },
+        labels: {
+          success: 'Channel configuration deleted.',
+          description: 'The Configuration for channel `$0` was deleted.'
+        }
       }
-    },
-    messages: {},
-    general: {
-      error: 'Error',
-      description: 'Description',
-      example: 'Example',
-      usage: 'Usage',
-      reason: 'Reason',
-      server: 'Server',
-      user: 'User',
-      message: 'Message',
-      title: 'Title'
-    },
-    error: {
-      user_not_found: 'User not found',
-      invalid_permissions: 'Invalid permissions',
-      invalid_usage: 'Invalid usage'
     }
   };
-  
+
   /**
    * Replaces preset args with values in a string
    * @param input
    * @param args
    * @return the filled string
    */
-   public static replaceArgs(input: string, args: string[]) {
+  public static replaceArgs(input: string, args: string[]) {
     // console.log(input);
     // console.log(args);
     for (let i = 0; i < args.length; i++) {

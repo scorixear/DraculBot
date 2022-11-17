@@ -1,7 +1,7 @@
 version: "3.8"
 
 volumes:
-  mariadb:
+  mysql:
     driver: local
 
 networks:
@@ -23,7 +23,7 @@ services:
     ports:
         - "40000:3306"
     volumes:
-     - mariadb:/var/lib/mysql
+     - mysql:/var/lib/mysql
     networks:
       db:
 
