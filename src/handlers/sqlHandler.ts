@@ -21,7 +21,13 @@ export default class SqlHandler {
   public async initDB() {
     let conn;
     try {
-      conn = await this.noArgsToPromise(this.pool.getConnection);
+      conn = await new Promise<mysql.PoolConnection>((resolve, reject) => {
+        this.pool.getConnection((err, conn) => {
+          if (err) reject(err);
+          else resolve(conn);
+        });
+      });
+
       await this.asyncQuery(
         conn,
         'CREATE TABLE IF NOT EXISTS `channels` (`id` VARCHAR(255) NOT NULL, `replacement` VARCHAR(255) NOT NULL, PRIMARY KEY (`id`))'
@@ -96,17 +102,6 @@ export default class SqlHandler {
     );
   }
 
-  private async noArgsToPromise<T>(
-    func: (callback: (err: mysql.MysqlError, returnValue: T) => void) => void
-  ): Promise<T> {
-    return await new Promise((resolve, reject) => {
-      func((err, val) => {
-        if (err) reject(err);
-        else resolve(val);
-      });
-    });
-  }
-
   private async asyncQuery(conn: mysql.PoolConnection, query: string, ...values: any[]): Promise<any> {
     return new Promise((resolve, reject) => {
       conn.query(query, values, (err, res) => {
@@ -124,7 +119,12 @@ export default class SqlHandler {
     let returnValue: T = initial;
     let conn;
     try {
-      conn = await this.noArgsToPromise(this.pool.getConnection);
+      conn = await new Promise<mysql.PoolConnection>((resolve, reject) => {
+        this.pool.getConnection((err, conn) => {
+          if (err) reject(err);
+          else resolve(conn);
+        });
+      });
       returnValue = await normal(conn);
     } catch (e) {
       error(e);

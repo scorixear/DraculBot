@@ -12,7 +12,7 @@ export default class LanguageHandler {
         },
         labels: {
           success: 'Channel configured',
-          description: 'Channel `$0` is configured. Temp channel follow the schema `$1`'
+          description: 'Channel $0 is configured. Temp channels follow the schema `$1`'
         },
         options: {
           channel: 'The channel that should be the temp channel generator',
@@ -28,7 +28,7 @@ export default class LanguageHandler {
         },
         labels: {
           success: 'Channel configuration deleted.',
-          description: 'The Configuration for channel `$0` was deleted.'
+          description: 'The Configuration for channel $0 was deleted.'
         }
       }
     }
