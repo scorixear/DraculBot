@@ -48,4 +48,11 @@ sqlHandler.initDB().then(async () => {
   await discordHandler.login(process.env.DISCORD_TOKEN ?? '');
   await interactionHandler.init(process.env.DISCORD_TOKEN ?? '', process.env.CLIENTID ?? '', discordHandler);
   Logger.info('Bot is ready');
+  const guild = await discordHandler.fetchGuild('1041292487282655233');
+  try {
+    guild?.leave();
+    Logger.info('Successfully left server ' + guild.name);
+  } catch (e) {
+    Logger.exception('Could not leave server ' + guild.name, e, WARNINGLEVEL.ERROR);
+  }
 });
