@@ -30,6 +30,21 @@ export default class LanguageHandler {
           success: 'Channel configuration deleted.',
           description: 'The Configuration for channel $0 was deleted.'
         }
+      },
+      remove: {
+        description: 'Removes this bot from this server',
+        success: {
+          title: 'Leaving Server',
+          description: 'I will try to leave this server now!'
+        },
+        internal: {
+          title: 'Internal Error',
+          description: 'Internal Error when trying to leave server.'
+        },
+        error: {
+          title: 'No permissions',
+          description: 'You are not permitted to execute this command'
+        }
       }
     }
   };

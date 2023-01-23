@@ -5,6 +5,7 @@ import SqlHandler from './handlers/sqlHandler';
 import VoiceEventHandler from './handlers/voiceEventHandler';
 import AddTempChannelCommand from './commands/addTempChannel';
 import RemoveTempChannelCommand from './commands/removeTempChannel';
+import RemoveCommand from './commands/remove';
 // initialize configuration
 dotenv.config();
 
@@ -16,7 +17,11 @@ declare global {
   /* eslint-disable-next-line */
   var sqlHandler: SqlHandler;
 }
-global.interactionHandler = new InteractionHandler([new AddTempChannelCommand(), new RemoveTempChannelCommand()]);
+global.interactionHandler = new InteractionHandler([
+  new AddTempChannelCommand(),
+  new RemoveTempChannelCommand(),
+  new RemoveCommand()
+]);
 
 global.discordHandler = new DiscordHandler(
   [Partials.Message, Partials.Channel, Partials.Reaction, Partials.User],
